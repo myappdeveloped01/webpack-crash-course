@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 const component = () => {
 	const element = document.createElement('div');
 	// lodashの機能を反映させる(lodashのオブジェクトは _ に格納されている)
