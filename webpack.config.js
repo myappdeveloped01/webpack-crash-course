@@ -14,4 +14,8 @@ module.exports = {
 		filename: 'main.js',
 		path: outputPath,
 	},
+	//ブラウザを起動したときに、最初に開く画面のパスを指定できる（localhostのトップレベルのディレクトリにできる）
+	devServer: {
+		contentBase: outputPath,
+	},
 };
