@@ -1,15 +1,9 @@
 import _ from 'lodash';
-// import { NiJou, NAME } from './utilities';
-// import * as utilities from './utilities';
-// import { NiJou, NAME as NAME_HAM } from './utilities';
-// export defaultで指定したメソッドや変数は、オブジェクトでない形で直接取得できる
-import NiJou, { NAME } from './utilities';
+// JSファイル以外は拡張子が必要
+// スタイルシートの取り込みは、「import cssファイル」の形式でよい
+import './style.css';
 
-console.log(NiJou(3));
-console.log(NAME);
-// console.log(NAME_HAM);
-// console.log(utilities.NiJou(4));
-// console.log(utilities.NAME);
+console.log(style.toString());
 
 const component = () => {
 	const element = document.createElement('div');
@@ -22,3 +16,5 @@ const component = () => {
 
 // bodyタグの中に、component()の返り値のdivタグを埋め込む
 document.body.appendChild(component());
+//
+document.body.classList.add('haikei');
