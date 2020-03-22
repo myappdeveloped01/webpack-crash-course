@@ -14,6 +14,18 @@ module.exports = {
 		filename: 'main.js',
 		path: outputPath,
 	},
+	module: {
+		rules: [
+			{
+				// モジュール（css-loaderとstyle-loader)を適用するファイルを正規表現で指定(cssファイルを定義した)
+				// useに指定したモジュールは、後に指定したモジュールから読み込まれる（順番に意味がある css -> style）
+				// css-loaderにより、JSファイルにcssファイルをimportしてcssが使えるようになる
+				// style-loaderにより、cssファイルのスタイルがhtmlファイルのheadタグのstyleタグに埋め込まれる
+				test: /\.css$/,
+				use: ['style-loader', 'css-loader'],
+			},
+		],
+	},
 	//ブラウザを起動したときに、最初に開く画面のパスを指定できる（localhostのトップレベルのディレクトリにできる）
 	devServer: {
 		contentBase: outputPath,
