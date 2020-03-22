@@ -3,8 +3,6 @@ import _ from 'lodash';
 // スタイルシートの取り込みは、「import cssファイル」の形式でよい
 import './style.css';
 
-console.log(style.toString());
-
 const component = () => {
 	const element = document.createElement('div');
 	// lodashの機能を反映させる(lodashのオブジェクトは _ に格納されている)
