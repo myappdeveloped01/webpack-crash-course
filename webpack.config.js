@@ -1,5 +1,6 @@
 // pathモジュールを読み込む
 const path = require('path');
+const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 //resolveは絶対パスに変換するメソッド
 // （第一引数は現在のディレクトリ名が格納された変数__dirnameをおき、第二引数に指定したディレクトリのパスを探索した結果を返り値とする）
@@ -16,6 +17,13 @@ module.exports = {
 	},
 	module: {
 		rules: [
+			{
+				// 結果をjs(またはjsx)ファイルを記法の変換の対象とする指定
+				test: /\.jsx?$/,
+				// babelによる、記法の変換の対象ファイルから除外する指定
+				exclude: /node_modules/,
+				loader: 'babel-loader',
+			},
 			{
 				// モジュール（css-loaderとstyle-loader)を適用するファイルを正規表現で指定(cssファイルを定義した)
 				// useに指定したモジュールは、後に指定したモジュールから読み込まれる（順番に意味がある css -> style）
@@ -43,10 +51,23 @@ module.exports = {
 					name: './images/[name].[ext]',
 				},
 			},
+			{
+				test: /\.html$/,
+				loader: 'html-loader',
+			},
 		],
 	},
 	//ブラウザを起動したときに、最初に開く画面のパスを指定できる（localhostのトップレベルのディレクトリにできる）
 	devServer: {
 		contentBase: outputPath,
 	},
+	// プラグインを設定
+	plugins: [
+		new HtmlWebPackPlugin({
+			// 変換するファイル名
+			template: './src/index.html',
+			// 出力結果のファイル名
+			filename: './index.html',
+		}),
+	],
 };
