@@ -24,6 +24,11 @@ module.exports = {
 				test: /\.css$/,
 				use: ['style-loader', 'css-loader'],
 			},
+			// sass-loaderとnode-sassモジュールを適用する設定（useで指定するモジュールの順番が大切）
+			{
+				test: /\.scss$/,
+				use: ['style-loader', 'css-loader', 'sass-loader'],
+			},
 			{
 				// 画像ファイルをJSファイルにインポートできるようになる
 				// 正規表現のiは大文字も適用するという意味

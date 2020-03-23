@@ -2,6 +2,7 @@ import _ from 'lodash';
 // JSファイル以外は拡張子が必要
 // スタイルシートの取り込みは、「import cssファイル」の形式でよい
 import './style.css';
+import './style.scss';
 import star from './star1.png';
 
 const component = () => {
