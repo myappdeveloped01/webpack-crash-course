@@ -1,0 +1,4 @@
+{
+	// preset（各記法を標準的な形式に変換）の各モジュールを有効にする設定
+	"presets": ["@babel/preset-env", "@babel/preset-react"]
+}
