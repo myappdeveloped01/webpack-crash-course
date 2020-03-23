@@ -24,6 +24,20 @@ module.exports = {
 				test: /\.css$/,
 				use: ['style-loader', 'css-loader'],
 			},
+			{
+				// 画像ファイルをJSファイルにインポートできるようになる
+				// 正規表現のiは大文字も適用するという意味
+				test: /\.(jpe?g|png|gif|svg|ico)$/i,
+				loader: 'url-loader',
+				// options属性を指定することにより、file-loaderが有効になる
+				options: {
+					// バイト数の上限を設定
+					limit: 2048,
+					// limitを超えるファイルは、name属性に指定した場所に、個別ファイルとして出力する
+					// 個別ファイルとして出力することにより、css等で背景画像などとして参照するときに扱いやすくなる
+					name: './images/[name].[ext]',
+				},
+			},
 		],
 	},
 	//ブラウザを起動したときに、最初に開く画面のパスを指定できる（localhostのトップレベルのディレクトリにできる）
