@@ -73,6 +73,7 @@ module.exports = {
 			new OptimizeCSSAssetsPlugin({}),
 		],
 	},
+	devtool: 'eval-source-map',
 
 	//ブラウザを起動したときに、最初に開く画面のパスを指定できる（localhostのトップレベルのディレクトリにできる）
 	devServer: {
