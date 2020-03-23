@@ -2,6 +2,7 @@
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 //resolveは絶対パスに変換するメソッド
 // （第一引数は現在のディレクトリ名が格納された変数__dirnameをおき、第二引数に指定したディレクトリのパスを探索した結果を返り値とする）
@@ -56,6 +57,18 @@ module.exports = {
 			},
 		],
 	},
+	// 今回はconsole.logを無視するために設定したが、ドキュメントを参照されば、様々なオプションが設定できる
+	optimization: {
+		minimizer: [new UglifyJsPlugin({
+			uglifyOptions: {
+				compress: {
+					// console.logを無視する設定
+					drop_console: true,
+				}
+			}
+		})],
+	},
+
 	//ブラウザを起動したときに、最初に開く画面のパスを指定できる（localhostのトップレベルのディレクトリにできる）
 	devServer: {
 		contentBase: outputPath,
