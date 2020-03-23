@@ -1,6 +1,7 @@
 // pathモジュールを読み込む
 const path = require('path');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 //resolveは絶対パスに変換するメソッド
 // （第一引数は現在のディレクトリ名が格納された変数__dirnameをおき、第二引数に指定したディレクトリのパスを探索した結果を返り値とする）
@@ -29,13 +30,11 @@ module.exports = {
 				// useに指定したモジュールは、後に指定したモジュールから読み込まれる（順番に意味がある css -> style）
 				// css-loaderにより、JSファイルにcssファイルをimportしてcssが使えるようになる
 				// style-loaderにより、cssファイルのスタイルがhtmlファイルのheadタグのstyleタグに埋め込まれる
-				test: /\.css$/,
-				use: ['style-loader', 'css-loader'],
-			},
-			// sass-loaderとnode-sassモジュールを適用する設定（useで指定するモジュールの順番が大切）
-			{
-				test: /\.scss$/,
-				use: ['style-loader', 'css-loader', 'sass-loader'],
+				// sass-loaderとnode-sassモジュールを適用する設定（useで指定するモジュールの順番が大切）
+				// sass-loaderは、scssだけでなく、cssについて指定しても不具合はないので、scssとcssの指定をまとめることができる
+				// min-css-extract-pluginプラグインのloaderプロパティを指定することで、scssファイルまたはcssファイルを生成するように設定する
+				test: /\.(sc|c)ss$/,
+				use: [MiniCssExtractPlugin.loader, /*'style-loader',*/ 'css-loader', 'sass-loader'],
 			},
 			{
 				// 画像ファイルをJSファイルにインポートできるようになる
@@ -68,6 +67,12 @@ module.exports = {
 			template: './src/index.html',
 			// 出力結果のファイル名
 			filename: './index.html',
+		}),
+		new MiniCssExtractPlugin({
+			// 生成するcssファイルの名前の設定
+			// デフォルトでは、[name]はmainになる
+			// [hash]は、キャッシュの影響でコードの変更が適用されない問題を解決するために、ビルドごとに文字列を変える
+			filename: '[name].[hash].css',
 		}),
 	],
 };
