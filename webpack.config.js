@@ -69,7 +69,8 @@ module.exports = {
 					},
 				},
 			}),
-			new OptimizeCSSAssetsPlugin({})
+			// --mode productionでコンパイルした時に、自動生成されたcssファイルも圧縮するようにする設定
+			new OptimizeCSSAssetsPlugin({}),
 		],
 	},
 
