@@ -21,6 +21,12 @@ module.exports = {
 	module: {
 		rules: [
 			{
+				enforce: 'pre',
+				test: /\.jsx?/,
+				exclude: /node_modules/,
+				loader: 'eslint-loader',
+			},
+			{
 				// 結果をjs(またはjsx)ファイルを記法の変換の対象とする指定
 				test: /\.jsx?$/,
 				// babelによる、記法の変換の対象ファイルから除外する指定
